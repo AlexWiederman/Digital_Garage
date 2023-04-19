@@ -10,11 +10,11 @@ const Model1Schema = new Schema({
     type: String,
     required: true,
   },
-  // saved book id from GoogleBooks
   year: {
     type: Number,
     required: true,
   },
+  //linking the type of oil a specific car uses to our products in the store
   oil: [productSchema],
 });
 
