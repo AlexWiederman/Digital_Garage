@@ -1,13 +1,54 @@
-const db = require('../config/connection');
-// const { Tech } = require('../models');
+const db = require("../config/connection");
+const { Product } = require("../models");
 
-// const techData = require('./techData.json');
+const productData = require("./productData.json");
 
-db.once('open', async () => {
-  // await Tech.deleteMany({});
+db.once("open", async () => {
+  await Product.deleteMany({});
 
-  // const technologies = await Tech.insertMany(techData);
+  const products = await Product.insertMany(productData);
 
-  // console.log('Technologies seeded!');
-  // process.exit(0);
+  console.log("products seeded!");
+
+  await User.deleteMany();
+
+  await User.create({
+    firstName: "Pamela",
+    lastName: "Washington",
+    email: "pamela@testmail.com",
+    password: "password12345",
+    cart: [
+      {
+        items: [items[0]._id, items[0]._id, items[1]._id],
+      },
+    ],
+  });
+
+  await User.create({
+    firstName: "Elijah",
+    lastName: "Holt",
+    email: "eholt@testmail.com",
+    password: "password12345",
+  });
+
+  console.log("users seeded");
+
+  await Car.deleteMany();
+
+  const cars = await Car.insertMany([
+    {
+      make: "Subaru",
+      model: "Subaru Forester",
+      year: 2020,
+      oil: [
+        {
+          items: [items[0]._id, items[0]._id, items[1]._id],
+        },
+      ],
+    },
+  ]);
+
+  console.log("cars seeded");
+
+  process.exit(0);
 });
