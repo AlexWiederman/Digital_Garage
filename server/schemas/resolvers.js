@@ -1,9 +1,36 @@
-const { User, Product } = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Car, Product } = require('../models');
+const { signToken } = require('../utils/auth');
+//second () contains API key, currently a public test key to later be replaced with a custom key set to test mode and imported using a .env file
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
-
 
 const resolvers = {
   Query: {
+    //user garage
+    garage: async (parent, args, context) => {
+      //if logged in
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate('ownedCars');
+        return user;
+      }
+      //else
+      throw new AuthenticationError('Please log in to view your garage.')
+    },
+    //user cart
+    //parent and args are never called, but seem necessary to include to make sure that "context" is in the proper position to act as the context argument
+    cart: async (parent, args, context) => {
+      //if logged in
+      if (context.user) {
+        const user = await User.findById(context.user.id).populate('cart');
+        return user;
+      }
+      //else
+      throw new AuthenticationError('Please log in to view your cart.')
+    },
+    //car oil types
+    oil: async () => {
+      return await populate(Car.oil);
+    },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products });
@@ -42,10 +69,91 @@ const resolvers = {
     }
   },
   Mutation: {
-    
+      //new user
+      addUser: async (parent, args) => {
+        //create a new user with the passed arguments
+        const user = await User.create(args);
+        //define a sign in token for the new user
+        const token = signToken(user);
+        //return token and user to login
+        return { token, user };
+      },
+      //delete user
+      deleteUser: async (parent, args, context) => {
+        //if the user is logged in...
+        if (context.user) {
+          return await User.findByIdAndDelete(context.user);
+        }
+        //else throw login error
+        throw new AuthenticationError('You must be logged in to perform this action.')
+      },
+      //add car to garage
+      addToGarage: async (parent, args, context) => {
+        //if the user is logged in...
+        if (context.user) {
+          //define the car to add with passed in argument
+          const car = new Car({ args });
+          //push the car to the user's garage
+          await User.findByIdAndUpdate(context.user.id, { $push: { cars: car } }, { new: true });
+          //return
+          return car;
+        }
+      },
+      //remove car from garage
+      removeFromGarage: async (parent, args, context) => {
+        //if the user is logged in...
+        if (context.user) {
+          const car = new Car({ args });
+          return await User.findByIdAndDelete(context.user.id, { $pull: { cars: car }}, { new:true });
+        }
+      },
+      //add product to cart
+      addToCart: async (parent, args, context) => {
+        //if the user is logged in...
+        if (context.user) {
+          //define the car to add with passed in argument
+          const product = Product.findById(args.product.id);
+          //push the car to the user's garage
+          await User.findByIdAndUpdate(context.user.id, { $push: { cart: product } }, { new: true });
+          //return
+          return product;
+        }
+      },
+      //remove product from cart
+      removeFromCart: async (parent, args, context) => {
+        //if the user is logged in...
+        if (context.user) {
+          //define the car to add with passed in argument
+          const product = args;
+          //push the car to the user's garage
+          await User.findByIdAndDelete(context.user.id, { $pull: { cart: product } }, { new: true });
+          //return
+          return product;
+        }
+      },
+      //login
+      login: async (parent, { email, password }) => {
+        //grab entered email
+        const user = await User.findOne({ email });
+
+        //throw error if there's no user with the given email
+        if (!user) {
+          throw new AuthenticationError('Incorrect login information.');
+        }
+
+        //grab entered password
+        const correctPw = await user.isCorrectPassword(password);
+
+        //throw error if the password is incorrect
+        if (!correctPw) {
+          throw new AuthenticationError('Incorrect login information.');
+        }
+        
+        //if there are no errors, return the token and sign the user in
+        const token = signToken(user);
+        return ( token, user );
+      }
     },
-    
-  
 };
 
 module.exports = resolvers;

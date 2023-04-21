@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Conventional",
+    "price": 55,
+    "Quantity": 100
+  },
+  {
+    "name": "High-Mileage",
+    "price": 99,
+    "Quantity": 110
+  },
+  {
+    "name": "Synthetic",
+    "price": 89,
+    "Quantity": 100
+  },
+  {
+    "name": "Synthetic Blend",
+    "price": 77,
+    "Quantity": 100
+  }
+]
