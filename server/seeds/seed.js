@@ -4,7 +4,7 @@ const { Product } = require("../models");
 const productData = require("./productData.json");
 
 db.once("open", async () => {
-  // await Product.deleteMany({});
+  await Product.deleteMany({});
 
   const products = await Product.insertMany(productData);
 
