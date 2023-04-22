@@ -28,14 +28,14 @@ const typeDefs = gql`
   type Query {
     garage: User
     cart: User 
-    oil: 
+    oil: User
   }
 
   type Mutation {
-    addUser
-    deleteUser
-    addToGarage
-    removeFromGarage
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    deleteUser(_id: ID!): User
+    addCar(make: String!, carModel: String!, year: Int!): Car
+    removeCar(_id: ID!, )
     addToCart
     removeFromCart
     login
