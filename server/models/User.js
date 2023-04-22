@@ -3,23 +3,17 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: STRING,
+      required: true,
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      required: true,
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      required: true,
       unique: true,
       validate: {
         isEmail: true,
@@ -27,7 +21,7 @@ const userSchema = new Schema(
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      required: true,
       validate: {
         len: [8],
       },

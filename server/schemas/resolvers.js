@@ -88,7 +88,7 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in to perform this action.')
       },
       //add car to garage
-      addToGarage: async (parent, args, context) => {
+      addCar: async (parent, args, context) => {
         //if the user is logged in...
         if (context.user) {
           //define the car to add with passed in argument
@@ -100,7 +100,7 @@ const resolvers = {
         }
       },
       //remove car from garage
-      removeFromGarage: async (parent, args, context) => {
+      removeCar: async (parent, args, context) => {
         //if the user is logged in...
         if (context.user) {
           const car = new Car({ args });
