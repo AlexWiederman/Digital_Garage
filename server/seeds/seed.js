@@ -1,9 +1,12 @@
 const db = require("../config/connection");
-const { Product } = require("../models");
+const { Product, User, Car } = require("../models");
 
 const productData = require("./productData.json");
 
+
+
 db.once("open", async () => {
+ 
   await Product.deleteMany({});
 
   const products = await Product.insertMany(productData);
@@ -17,11 +20,6 @@ db.once("open", async () => {
     lastName: "Washington",
     email: "pamela@testmail.com",
     password: "password12345",
-    cart: [
-      {
-        items: [items[0]._id, items[0]._id, items[1]._id],
-      },
-    ],
   });
 
   await User.create({
@@ -35,14 +33,14 @@ db.once("open", async () => {
 
   await Car.deleteMany();
 
-  const cars = await Car.insertMany([
+  const cars = await Car.create([
     {
       make: "Subaru",
-      model: "Subaru Forester",
+      carModel: "Subaru Forester",
       year: 2020,
       oil: [
         {
-          items: [items[0]._id, items[0]._id, items[1]._id],
+          products: [products[0]]
         },
       ],
     },
