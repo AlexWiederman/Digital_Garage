@@ -1,6 +1,5 @@
 import React from "react";
 import ProductList from "../components/ProductList";
-import CategoryMenu from "../components/CategoryMenu";
 import CartItem from "../components/CartItem";
 import Jumbotron from "../components/Jumbotron";
 
