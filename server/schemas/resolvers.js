@@ -107,30 +107,6 @@ const resolvers = {
           return await User.findByIdAndDelete(context.user.id, { $pull: { cars: car }}, { new:true });
         }
       },
-      //add product to cart
-      addToCart: async (parent, args, context) => {
-        //if the user is logged in...
-        if (context.user) {
-          //define the car to add with passed in argument
-          const product = Product.findById(args.product.id);
-          //push the car to the user's garage
-          await User.findByIdAndUpdate(context.user.id, { $push: { cart: product } }, { new: true });
-          //return
-          return product;
-        }
-      },
-      //remove product from cart
-      removeFromCart: async (parent, args, context) => {
-        //if the user is logged in...
-        if (context.user) {
-          //define the car to add with passed in argument
-          const product = args;
-          //push the car to the user's garage
-          await User.findByIdAndDelete(context.user.id, { $pull: { cart: product } }, { new: true });
-          //return
-          return product;
-        }
-      },
       //login
       login: async (parent, { email, password }) => {
         //grab entered email
