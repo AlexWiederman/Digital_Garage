@@ -1,5 +1,8 @@
 import React from "react";
 import ProductList from "../components/ProductList";
+import CategoryMenu from "../components/CategoryMenu";
+import CartItem from "../components/CartItem";
+import Jumbotron from "../components/Jumbotron";
 
 import Cart from "../components/Cart";
 
@@ -13,5 +16,20 @@ const Home = () => {
   );
 };
 
-export default Home;
 
+// Diallo Changes
+// const Home = () => {
+//   return (
+//     <div className="container">
+//       <CategoryMenu />
+//       <ProductList />
+//       <Cart />
+//       <CartItem />
+//       <DeleteBtn />
+//       <Jumbotron />
+//       <Nav />
+//     </div>
+//   );
+// };
+
+export default Home;
