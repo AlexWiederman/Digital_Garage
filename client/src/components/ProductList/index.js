@@ -52,7 +52,6 @@ function ProductList() {
             <ProductItem
               key={product._id}
               _id={product._id}
-              image={product.image}
               name={product.name}
               price={product.price}
               quantity={product.quantity}

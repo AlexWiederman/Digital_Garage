@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Car, Product } = require('../models');
 const { signToken } = require('../utils/auth');
 //second () contains API key, currently a public test key to later be replaced with a custom key set to test mode and imported using a .env file
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require('stripe')('pk_test_51N0XmWDAUytjOyUALDTvBl7rqy19lubqzbgRYnAfH5XIuJcavXy96boJ7l2TJH8Mr6BrD0XhS1bBCQLMtTb6yOaP00eehxSPhb');
 
 const resolvers = {
   Query: {
