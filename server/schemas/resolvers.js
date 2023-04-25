@@ -10,8 +10,14 @@ const resolvers = {
     garage: async (parent, args, context) => {
       //if logged in
       if (context.user) {
-        const user = await User.findById(context.user._id).populate('ownedCars');
-        return user;
+        const garage = await User.findById(context.user.id).populate({
+          path: 'user.ownedCars'
+        });
+        console.log(garage);
+        if (garage) {
+          return garage;
+        }
+        return "Well";
       }
       //else
       throw new AuthenticationError('Please log in to view your garage.')
@@ -28,8 +34,9 @@ const resolvers = {
       throw new AuthenticationError('Please log in to view your cart.')
     },
     //car oil types
-    oil: async () => {
-      return await populate(Car.oil);
+    oil: async (parent, id) => {
+      const product = await Product.findById(id);
+      return product;
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
@@ -94,10 +101,12 @@ const resolvers = {
           //define the car to add with passed in argument
           const car = new Car( args );
           //push the car to the user's garage
-          await User.findByIdAndUpdate(context.user.id, { $push: { cars: car } }, { new: true });
+          await User.findByIdAndUpdate(context.user.id, { $push: { ownedCars: car } }, { new: true });
           //return
           return car;
         }
+        //else throw login error
+        throw new AuthenticationError('You must be logged in to perform this action.')
       },
       //remove car from garage
       removeCar: async (parent, args, context) => {
@@ -127,7 +136,7 @@ const resolvers = {
         
         //if there are no errors, return the token and sign the user in
         const token = signToken(user);
-        return ( token, user );
+        return { token, user };
       }
     },
 };
