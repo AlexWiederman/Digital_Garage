@@ -10,7 +10,7 @@ const resolvers = {
     garage: async (parent, args, context) => {
       //if logged in
       if (context.user) {
-        const user = await User.findById(context.user._id).populate('ownedCars');
+        const user = await User.findById(context.user.id).populate('ownedCars');
         return user;
       }
       //else
@@ -127,7 +127,7 @@ const resolvers = {
         
         //if there are no errors, return the token and sign the user in
         const token = signToken(user);
-        return ( token, user );
+        return { token, user };
       }
     },
 };
