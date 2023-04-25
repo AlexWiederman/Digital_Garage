@@ -10,7 +10,6 @@ import { idbPromise } from '../../utils/helpers';
 function ProductList() {
   const [state, dispatch] = useStoreContext();
 
-  const { currentCategory } = state;
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
@@ -23,6 +22,7 @@ function ProductList() {
       data.products.forEach((product) => {
         idbPromise('products', 'put', product);
       });
+      
     } else if (!loading) {
       idbPromise('products', 'get').then((products) => {
         dispatch({
@@ -33,22 +33,22 @@ function ProductList() {
     }
   }, [data, loading, dispatch]);
 
-  function filterProducts() {
-    if (!currentCategory) {
-      return state.products;
-    }
+  // function filterProducts() {
+  //   if (!currentCategory) {
+  //     return state.products;
+  //   }
 
-    return state.products.filter(
-      (product) => product.category._id === currentCategory
-    );
-  }
+  //   return state.products.filter(
+  //     (product) => product.category._id === currentCategory
+  //   );
+  // }
 
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {state.products.length ? (
+      {state.products.length >0? (
         <div className="flex-row">
-          {filterProducts().map((product) => (
+          {state.products.map((product) => (
             <ProductItem
               key={product._id}
               _id={product._id}
