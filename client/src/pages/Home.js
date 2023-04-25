@@ -1,16 +1,17 @@
 import React from "react";
 import ProductList from "../components/ProductList";
-import CartItem from "../components/CartItem";
-import Jumbotron from "../components/Jumbotron";
+// import CartItem from "../components/CartItem";
+// import Jumbotron from "../components/Jumbotron";
 
 import Cart from "../components/Cart";
 
 const Home = () => {
   return (
     <div className="container">
-      
-      {/* <ProductList /> */}
+      <ProductList />
       {/* <Cart /> */}
+       {/* <CartItem /> */}
+      {/* <Jumbotron /> */}
     </div>
   );
 };
@@ -20,7 +21,6 @@ const Home = () => {
 // const Home = () => {
 //   return (
 //     <div className="container">
-//       <CategoryMenu />
 //       <ProductList />
 //       <Cart />
 //       <CartItem />
