@@ -92,7 +92,7 @@ const resolvers = {
         //if the user is logged in...
         if (context.user) {
           //define the car to add with passed in argument
-          const car = new Car({ args });
+          const car = new Car( args );
           //push the car to the user's garage
           await User.findByIdAndUpdate(context.user.id, { $push: { cars: car } }, { new: true });
           //return
