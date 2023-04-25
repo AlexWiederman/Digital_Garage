@@ -8,7 +8,6 @@ export const QUERY_PRODUCTS = gql`
       description
       price
       quantity
-      image
       category {
         _id
       }

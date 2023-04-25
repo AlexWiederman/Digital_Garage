@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Success from './pages/Success';
+// import Success from './pages/Success';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
