@@ -19,9 +19,11 @@ const resolvers = {
       throw new AuthenticationError('Please log in to view your garage.')
     },
     //car oil types
+
     oil: async (parent, { _id }) => {
       const product = await Product.findById(_id);
       console.log(product);
+
       return product;
     },
     checkout: async (parent, args, context) => {
