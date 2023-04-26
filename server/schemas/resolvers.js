@@ -10,32 +10,20 @@ const resolvers = {
     garage: async (parent, args, context) => {
       //if logged in
       if (context.user) {
-        const garage = await User.findById(context.user.id).populate({
-          path: 'user.ownedCars'
+        const garage = await User.findById(context.user._id).populate({
+          path: 'ownedCars',
         });
-        console.log(garage);
-        if (garage) {
-          return garage;
-        }
-        return "Well";
+        return garage;
       }
       //else
       throw new AuthenticationError('Please log in to view your garage.')
     },
-    //user cart
-    //parent and args are never called, but seem necessary to include to make sure that "context" is in the proper position to act as the context argument
-    cart: async (parent, args, context) => {
-      //if logged in
-      if (context.user) {
-        const user = await User.findById(context.user.id).populate('cart');
-        return user;
-      }
-      //else
-      throw new AuthenticationError('Please log in to view your cart.')
-    },
     //car oil types
-    oil: async (parent, _id) => {
+
+    oil: async (parent, { _id }) => {
       const product = await Product.findById(_id);
+      console.log(product);
+
       return product;
     },
     checkout: async (parent, args, context) => {
@@ -99,9 +87,9 @@ const resolvers = {
         //if the user is logged in...
         if (context.user) {
           //define the car to add with passed in argument
-          const car = new Car( args );
+          const car = new Car(args);
           //push the car to the user's garage
-          await User.findByIdAndUpdate(context.user.id, { $push: { ownedCars: car } }, { new: true });
+          await User.findByIdAndUpdate(context.user._id, { $push: { ownedCars: car } }, { new: true });
           //return
           return car;
         }
@@ -113,7 +101,7 @@ const resolvers = {
         //if the user is logged in...
         if (context.user) {
           const car = new Car({ args });
-          return await User.findByIdAndDelete(context.user.id, { $pull: { cars: car }}, { new:true });
+          return await User.findByIdAndDelete(context.user._id, { $pull: { cars: car }}, { new:true });
         }
       },
       //login
