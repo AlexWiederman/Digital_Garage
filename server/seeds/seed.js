@@ -33,11 +33,17 @@ db.once("open", async () => {
 
   await Car.deleteMany();
 
+  console.log(products);
+
   const cars = await Car.create([
     {
       make: "Subaru",
       carModel: "Subaru Forester",
       year: 2020,
+      oil: [
+        products[0]
+        
+      ]
     },
   ]);
 

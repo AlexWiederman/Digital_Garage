@@ -10,10 +10,17 @@ const resolvers = {
     garage: async (parent, args, context) => {
       //if logged in
       if (context.user) {
+<<<<<<< HEAD
         const garage = await User.findById(context.user.id).populate('ownedCars');
         console.log(garage);
         
         return "Well";
+=======
+        const garage = await User.findById(context.user._id).populate({
+          path: 'ownedCars',
+        });
+        return garage;
+>>>>>>> c126560e155062f3e5bfecac2835ca8e56d3ee04
       }
       //else
       throw new AuthenticationError('Please log in to view your garage.')
@@ -85,9 +92,9 @@ const resolvers = {
         //if the user is logged in...
         if (context.user) {
           //define the car to add with passed in argument
-          const car = new Car( args );
+          const car = new Car(args);
           //push the car to the user's garage
-          await User.findByIdAndUpdate(context.user.id, { $push: { ownedCars: car } }, { new: true });
+          await User.findByIdAndUpdate(context.user._id, { $push: { ownedCars: car } }, { new: true });
           //return
           return car;
         }
@@ -99,7 +106,7 @@ const resolvers = {
         //if the user is logged in...
         if (context.user) {
           const car = new Car({ args });
-          return await User.findByIdAndDelete(context.user.id, { $pull: { cars: car }}, { new:true });
+          return await User.findByIdAndDelete(context.user._id, { $pull: { cars: car }}, { new:true });
         }
       },
       //login

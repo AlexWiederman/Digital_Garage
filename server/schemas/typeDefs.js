@@ -33,7 +33,7 @@ const typeDefs = gql`
   }
   
   type Query {
-    garage(ownedCars: [ID]!): User
+    garage: User
     oil(_id: [ID]!): Product
     checkout(products: [ID]!): Checkout
   }
