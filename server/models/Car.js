@@ -14,8 +14,6 @@ const carSchema = new Schema({
     type: Number,
     required: true,
   },
-  //linking the type of oil a specific car uses to our products in the store
-  oil: [Product.schema],
 });
 
 const Car = model("Car", carSchema);
