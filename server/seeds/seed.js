@@ -38,16 +38,6 @@ db.once("open", async () => {
       make: "Subaru",
       carModel: "Subaru Forester",
       year: 2020,
-      //Cannot get dynamic reference to work
-      // oil: [
-      //   {
-      //     products: [products[0]]
-      //   },
-      // ],
-      oil: {"name": "Conventional",
-      "price": "55",
-      "quantity": "100"
-    }
     },
   ]);
 

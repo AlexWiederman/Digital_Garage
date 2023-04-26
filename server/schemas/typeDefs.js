@@ -7,7 +7,6 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     ownedCars: [Car]
-    cart: [Product]
   }
 
   type Car {
@@ -15,7 +14,6 @@ const typeDefs = gql`
     make: String!
     carModel: String!
     year: Int!
-    oil: [Product]!
   }
 
   type Product {
@@ -35,9 +33,8 @@ const typeDefs = gql`
   }
   
   type Query {
-    garage: User
-    cart: User 
-    oil(product: [ID]!): Product
+    garage(ownedCars: [ID]!): User
+    oil(_id: [ID]!): Product
     checkout(products: [ID]!): Checkout
   }
 
