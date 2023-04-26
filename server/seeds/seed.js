@@ -33,21 +33,17 @@ db.once("open", async () => {
 
   await Car.deleteMany();
 
+  console.log(products);
+
   const cars = await Car.create([
     {
       make: "Subaru",
       carModel: "Subaru Forester",
       year: 2020,
-      //Cannot get dynamic reference to work
-      // oil: [
-      //   {
-      //     products: [products[0]]
-      //   },
-      // ],
-      oil: {"name": "Conventional",
-      "price": "55",
-      "quantity": "100"
-    }
+      oil: [
+        products[0]
+        
+      ]
     },
   ]);
 

@@ -1,6 +1,6 @@
 import React from "react";
-import ProductList from "../components/ProductList";
-// import CartItem from "../components/CartItem";
+// import ProductList from "../components/ProductList";
+import CartItem from "../components/CartItem";
 // import Jumbotron from "../components/Jumbotron";
 
 import Cart from "../components/Cart";
@@ -8,10 +8,8 @@ import Cart from "../components/Cart";
 const Home = () => {
   return (
     <div className="container">
-      <ProductList />
+      {/* <ProductList /> */}
       {/* <Cart /> */}
-       {/* <CartItem /> */}
-      {/* <Jumbotron /> */}
     </div>
   );
 };

@@ -34,8 +34,8 @@ const resolvers = {
       throw new AuthenticationError('Please log in to view your cart.')
     },
     //car oil types
-    oil: async (parent, id) => {
-      const product = await Product.findById(id);
+    oil: async (parent, _id) => {
+      const product = await Product.findById(_id);
       return product;
     },
     checkout: async (parent, args, context) => {
