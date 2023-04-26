@@ -10,17 +10,10 @@ const resolvers = {
     garage: async (parent, args, context) => {
       //if logged in
       if (context.user) {
-<<<<<<< HEAD
-        const garage = await User.findById(context.user.id).populate('ownedCars');
-        console.log(garage);
-        
-        return "Well";
-=======
         const garage = await User.findById(context.user._id).populate({
           path: 'ownedCars',
         });
         return garage;
->>>>>>> c126560e155062f3e5bfecac2835ca8e56d3ee04
       }
       //else
       throw new AuthenticationError('Please log in to view your garage.')
