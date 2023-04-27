@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_OIL = gql`
-query Oil($product: [ID]!) {
-  oil(product: $product) {
+query Oil($id: [ID]!) {
+  oil(_id: $id) {
     id
     name
     price
@@ -14,45 +14,26 @@ query Oil($product: [ID]!) {
 
 
 export const QUERY_CHECKOUT = gql`
-  query getCheckout($products: [ID]!) {
-    checkout(products: $products) {
-      session
-    }
+query Oil($products: [ID]!) {
+  checkout(products: $products) {
+    session
   }
+}
 `;
 
-export const QUERY_ALL_PRODUCTS = gql`
-  {
-    products {
-      _id
-      name
-      description
-      price
-      quantity
-      category {
-        name
-      }
+export const QUERY_GARAGE = gql`
+query Garage {
+  garage {
+    email
+    firstName
+    id
+    lastName
+    ownedCars {
+      carModel
+      id
+      make
+      year
     }
   }
-`;
-
-export const QUERY_USER = gql`
-  {
-    user {
-      firstName
-      lastName
-      orders {
-        _id
-        purchaseDate
-        products {
-          _id
-          name
-          description
-          price
-          quantity
-          image
-        }
-      }
-    }
-  }
+}
 `;
