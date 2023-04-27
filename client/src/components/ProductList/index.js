@@ -24,10 +24,10 @@ function ProductList() {
         products: data.allProducts,
       });
       data.allProducts.forEach((product) => {
-        idbPromise("allProducts", "put", product);
+        idbPromise("products", "put", product);
       });
     } else if (!loading) {
-      idbPromise("allProducts", "get").then((allProducts) => {
+      idbPromise("products", "get").then((allProducts) => {
         dispatch({
           type: UPDATE_PRODUCTS,
           products: allProducts,

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Nav() {
 
   function showNavigation() {
-   
+    if (Auth.loggedIn()) {
       return (
         <div >
         <ul className="flex-row">
@@ -19,8 +19,11 @@ function Nav() {
             </a>
           </li>
         </ul>
-      
-    
+      </div>
+      )
+      } else {
+        return (
+    <div >
         <ul className="flex-row">
           <li className="mx-1">
             <Link to="/signup">
@@ -36,7 +39,7 @@ function Nav() {
       </div>
 
       );
-     
+      }
   }
 
   return (
