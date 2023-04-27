@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div className="container">
       <ProductList />
-      {/* <Cart /> */}
+      <Cart />
     </div>
   );
 };
