@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Car, Product } = require('../models');
+const { User, Car, Product, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 //second () contains API key, currently a public test key to later be replaced with a custom key set to test mode and imported using a .env file
 const stripe = require('stripe')('pk_test_51N0XmWDAUytjOyUALDTvBl7rqy19lubqzbgRYnAfH5XIuJcavXy96boJ7l2TJH8Mr6BrD0XhS1bBCQLMtTb6yOaP00eehxSPhb');
@@ -18,6 +18,30 @@ const resolvers = {
       //else
       throw new AuthenticationError('Please log in to view your garage.')
     },
+
+    // //user query
+    // user: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const user = await User.findById(context.user._id).populate('orders.products');
+
+    //     user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+
+    //     return user;
+    //   }
+
+    //   throw new AuthenticationError('Not logged in');
+    // },
+
+    //query order
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate('orders.products');
+
+        return user.orders.id(_id);
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
  
     //car oil types
     oil: async (parent, { _id }) => {
@@ -29,7 +53,7 @@ const resolvers = {
       const order = new Order({ products: args.products });
       const line_items = [];
 
-      const { products } = await Product.populate('products');
+      const { products } = await order.populate('products');
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
@@ -71,6 +95,12 @@ const resolvers = {
         //return token and user to login
         return { token, user };
       },
+      //update products
+      updateProduct: async (parent, { _id, quantity }) => {
+        const decrement = Math.abs(quantity) * -1;
+  
+        return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+      },
       //delete user
       deleteUser: async (parent, args, context) => {
         //if the user is logged in...
@@ -79,6 +109,19 @@ const resolvers = {
         }
         //else throw login error
         throw new AuthenticationError('You must be logged in to perform this action.')
+      },
+      //add order
+      addOrder: async (parent, { products }, context) => {
+        console.log(context);
+        if (context.user) {
+          const order = new Order({ products });
+  
+          await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+  
+          return order;
+        }
+  
+        throw new AuthenticationError('Not logged in');
       },
       //add car to garage
       addCar: async (parent, args, context) => {
