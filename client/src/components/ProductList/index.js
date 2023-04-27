@@ -7,61 +7,91 @@ import { QUERY_OIL } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 
 function ProductList() {
+//Adding oil from products model
+
+
   const [state, dispatch] = useStoreContext();
 
-  const { currentCategory } = state;
+  // const { currentCategory } = state;
 
-  const { loading, data } = useQuery(QUERY_OIL);
+  // const { loading, data } = useQuery(QUERY_OIL);
 
-  useEffect(() => {
-    // console.log(state)
-    console.log(data)
-    if (data) {
-      dispatch({
-        type: UPDATE_PRODUCTS,
-        oil: data.oil,
-      });
-      data.oil.forEach((product) => {
-        idbPromise("oil", "put", product);
-      });
-    } else if (!loading) {
-      idbPromise("oil", "get").then((oil) => {
-        dispatch({
-          type: UPDATE_PRODUCTS,
-          oil: oil,
-        });
-      });
-    }
-  }, [data, loading, dispatch]);
+  // useEffect(() => {
+  //   // console.log(state)
+  //   console.log(data)
+  //   if (data) {
+  //     dispatch({
+  //       type: UPDATE_PRODUCTS,
+  //       oil: data.oil,
+  //     });
+  //     data.oil.forEach((product) => {
+  //       idbPromise("oil", "put", product);
+  //     });
+  //   } else if (!loading) {
+  //     idbPromise("oil", "get").then((oil) => {
+  //       dispatch({
+  //         type: UPDATE_PRODUCTS,
+  //         oil: oil,
+  //       });
+  //     });
+  //   }
+  // }, [data, loading, dispatch]);
+  
+  console.log(state.products.length)
+
+
+  // useEffect(() => {
+  //   console.log(data)
+  //   if (data) {
+  //     dispatch({
+  //       type: UPDATE_PRODUCTS,
+  //       products: data.products,
+  //     });
+  //     data.products.forEach((product) => {
+  //       idbPromise("products", "put", product);
+  //     });
+  //   } else if (!loading) {
+  //     idbPromise("products", "get").then((products) => {
+  //       dispatch({
+  //         type: UPDATE_PRODUCTS,
+  //         products: products,
+  //       });
+  //     });
+  //   }
+  // }, [data, loading, dispatch]);
   // }, [data, loading]); //Debug Code
   function filterProducts() {
     if (!currentCategory) {
       return state.oil;
     }
 
-    return state.oil.filter(
-      (product) => product === currentCategory
-    );
-  }
+  //   return state.oil.filter(
+  //     (product) => product === currentCategory
+  //   );
+  // }
+  //   return state.products.filter(
+  //     (product) => product.category._id === currentCategory
+  //  } );
+  // }
 
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
       {state.products.length > 0 ? (
         <div className="flex-row">
-          {filterProducts().map((product) => (
+          {/*  {filterProducts().map((product) => ( */}
+           {state.products.map((product) => (
             <ProductItem
-              key={product._id}
               _id={product._id}
               name={product.name}
               price={product.price}
               quantity={product.quantity}
             />
-          ))}
+          ))} 
         </div>
-      ) : (
+        ) : (  
         <h3>You haven't added any products yet!</h3>
-      )}
+         )}  
     </div>
   );
 }
