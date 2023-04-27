@@ -100,8 +100,8 @@ const resolvers = {
       removeCar: async (parent, args, context) => {
         //if the user is logged in...
         if (context.user) {
-          const car = new Car({ args });
-          return await User.findByIdAndDelete(context.user._id, { $pull: { cars: car }}, { new:true });
+          const car = new Car(args);
+          return await User.findByIdAndDelete(context.user._id, { $pull: { ownedCars: car }}, { new:true });
         }
       },
       //login
