@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const Product = require('./Product');
 
 const carSchema = new Schema({
   make: {

@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import ProductItem from "../ProductItem";
 import { useStoreContext } from "../../utils/GlobalState";
-import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { UPDATE_PRODUCTS } from "../../utils/actions";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 
 function ProductList() {
-//Adding oil from products model
-
+  //Adding oil from products model
 
   const [state, dispatch] = useStoreContext();
 
@@ -18,7 +17,7 @@ function ProductList() {
 
   useEffect(() => {
     // console.log(state)
-    console.log(data)
+    console.log(data);
     if (data) {
       dispatch({
         type: UPDATE_PRODUCTS,
@@ -36,9 +35,8 @@ function ProductList() {
       });
     }
   }, [data, loading, dispatch]);
-  
-  // console.log(state.products.length)
 
+  // console.log(state.products.length)
 
   // useEffect(() => {
   //   console.log(data)
@@ -65,9 +63,7 @@ function ProductList() {
       return state.products;
     }
 
-    return state.products.filter(
-      (product) => product._id === currentCategory
-    );
+    return state.products.filter((product) => product._id === currentCategory);
   }
   //   return state.products.filter(
   //     (product) => product.category._id === currentCategory
@@ -80,18 +76,20 @@ function ProductList() {
       {state.products.length > 0 ? (
         <div className="flex-row">
           {/*  {filterProducts().map((product) => ( */}
-           {filterProducts().map((product) => (
+          {filterProducts().map((product) => (
             <ProductItem
+              key={product._id}
               _id={product._id}
+              image={product.image}
               name={product.name}
               price={product.price}
               quantity={product.quantity}
             />
-          ))} 
+          ))}
         </div>
-        ) : (  
+      ) : (
         <h3>You haven't added any products yet!</h3>
-         )}  
+      )}
     </div>
   );
 }

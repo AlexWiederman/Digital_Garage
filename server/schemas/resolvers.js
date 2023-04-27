@@ -43,6 +43,7 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
+    //all products
     allProducts: async () => {
       return await Product.find();
     },
@@ -52,10 +53,7 @@ const resolvers = {
       const product = await Product.findById(_id);
       return product;
     },
-    //all products
-    allProducts: async () => {
-      return await Product.find();
-    },
+
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products });

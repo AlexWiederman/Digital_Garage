@@ -3,8 +3,9 @@ import { gql } from '@apollo/client';
 export const QUERY_OIL = gql`
 query Oil($id: [ID]!) {
   oil(_id: $id) {
-    id
+    _id
     name
+    image
     price
     quantity
   }
@@ -14,8 +15,9 @@ query Oil($id: [ID]!) {
 export const QUERY_PRODUCTS = gql`
 query Query {
   allProducts {
-    id
+    _id
     name
+    image
     price
     quantity
   }
@@ -33,13 +35,13 @@ query Oil($products: [ID]!) {
 export const QUERY_GARAGE = gql`
 query Garage {
   garage {
+    _id
     email
     firstName
-    id
     lastName
     ownedCars {
+      _id
       carModel
-      id
       make
       year
     }
