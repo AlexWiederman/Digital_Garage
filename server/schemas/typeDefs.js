@@ -54,7 +54,7 @@ const typeDefs = gql`
     addOrder(products: [ID]!): Order
     updateProduct(_id: ID!, quantity: Int!): Product
     addCar(make: String!, carModel: String!, year: Int!): Car
-    removeCar(_id: ID!): User
+    removeCar(_id: ID!): Car
     login(email: String!, password: String!): Auth
   }
 `;
