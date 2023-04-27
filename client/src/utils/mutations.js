@@ -6,13 +6,13 @@ mutation Mutation($email: String!, $password: String!) {
   login(email: $email, password: $password) {
     token
     user {
+      _id
       email
       firstName
-      id
       lastName
       ownedCars {
+        _id
         carModel
-        id
         make
         year
       }
@@ -27,9 +27,9 @@ mutation Mutation($firstName: String!, $lastName: String!, $email: String!, $pas
     token
     user {
       ownedCars {
+        _id
         year
         make
-        id
         carModel
       }
     }
@@ -40,8 +40,8 @@ mutation Mutation($firstName: String!, $lastName: String!, $email: String!, $pas
 export const ADD_CAR = gql`
 mutation Mutation($make: String!, $carModel: String!, $year: Int!) {
   addCar(make: $make, carModel: $carModel, year: $year) {
+    _id
     carModel
-    id
     make
     year
   }
@@ -51,13 +51,13 @@ mutation Mutation($make: String!, $carModel: String!, $year: Int!) {
 export const DELETE_USER = gql`
 mutation Mutation($id: ID!) {
   deleteUser(_id: $id) {
+    _id
     email
     firstName
-    id
     lastName
     ownedCars {
+      _id
       carModel
-      id
       make
       year
     }
@@ -86,12 +86,12 @@ export const ADD_ORDER = gql`
 export const REMOVE_CAR = gql`
 mutation RemoveCar($id: ID!) {
   removeCar(_id: $id) {
+    _id
     email
     firstName
-    id
     ownedCars {
+      _id
       carModel
-      id
       make
       year
     }
