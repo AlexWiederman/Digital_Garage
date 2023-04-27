@@ -33,6 +33,8 @@ db.once("open", async () => {
 
   await Car.deleteMany();
 
+  console.log(products);
+
   const cars = await Car.create([
     {
       make: "Subaru",

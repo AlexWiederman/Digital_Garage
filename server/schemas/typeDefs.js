@@ -2,50 +2,63 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    id: ID
-    firstName: String
-    lastName: String
-    email: String
+    _id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
     ownedCars: [Car]
-    cart: [Product]
+    orders: [Order]
   }
 
   type Car {
-    id: ID
-    make: String
-    carModel: String
-    year: Int
-    oil: [Product]
+    _id: ID!
+    make: String!
+    carModel: String!
+    year: Int!
   }
 
   type Product {
-    id: ID
-    name: String
-    price: Int
-    quantity: Int
+    _id: ID!
+    image: String!
+    name: String!
+    price: Int!
+    quantity: Int!
+  }
+
+  type Order {
+    _id: ID
+    purchaseDate: String
+    products: [Product]
   }
 
   type Auth {
     token: ID!
+<<<<<<< HEAD
     user: User
+=======
+    user: User!
+>>>>>>> 40aa27a8620141f4a3ccedfef98f22f72e018121
   }
 
   type Checkout {
-    session: ID
+    session: ID!
   }
   
   type Query {
     garage: User
-    cart: User 
-    oil: User
+    allProducts: [Product]
+    oil(_id: [ID]!): Product
+    order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     deleteUser(_id: ID!): User
+    addOrder(products: [ID]!): Order
+    updateProduct(_id: ID!, quantity: Int!): Product
     addCar(make: String!, carModel: String!, year: Int!): Car
-    removeCar(_id: ID!): User
+    removeCar(_id: ID!): Car
     login(email: String!, password: String!): Auth
   }
 `;
