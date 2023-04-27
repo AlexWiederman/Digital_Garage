@@ -19,6 +19,7 @@ const typeDefs = gql`
 
   type Product {
     id: ID!
+    image: String!
     name: String!
     price: Int!
     quantity: Int!
@@ -41,6 +42,7 @@ const typeDefs = gql`
   
   type Query {
     garage: User
+    allProducts: [Product]
     oil(_id: [ID]!): Product
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout

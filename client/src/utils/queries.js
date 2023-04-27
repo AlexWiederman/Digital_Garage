@@ -11,7 +11,16 @@ query Oil($id: [ID]!) {
 }
 `;
 
-
+export const QUERY_PRODUCTS = gql`
+query Query {
+  allProducts {
+    id
+    name
+    price
+    quantity
+  }
+}
+`;
 
 export const QUERY_CHECKOUT = gql`
 query Oil($products: [ID]!) {

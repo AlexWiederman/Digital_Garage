@@ -42,6 +42,10 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+
+    allProducts: async () => {
+      return await Product.find();
+    },
  
     //car oil types
     oil: async (parent, { _id }) => {

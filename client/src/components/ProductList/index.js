@@ -3,7 +3,7 @@ import ProductItem from "../ProductItem";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from "@apollo/client";
-import { QUERY_OIL } from "../../utils/queries";
+import { QUERY_PRODUCTS } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 
 function ProductList() {
@@ -12,32 +12,32 @@ function ProductList() {
 
   const [state, dispatch] = useStoreContext();
 
-  // const { currentCategory } = state;
+  const { currentCategory } = state;
 
-  // const { loading, data } = useQuery(QUERY_OIL);
+  const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  // useEffect(() => {
-  //   // console.log(state)
-  //   console.log(data)
-  //   if (data) {
-  //     dispatch({
-  //       type: UPDATE_PRODUCTS,
-  //       oil: data.oil,
-  //     });
-  //     data.oil.forEach((product) => {
-  //       idbPromise("oil", "put", product);
-  //     });
-  //   } else if (!loading) {
-  //     idbPromise("oil", "get").then((oil) => {
-  //       dispatch({
-  //         type: UPDATE_PRODUCTS,
-  //         oil: oil,
-  //       });
-  //     });
-  //   }
-  // }, [data, loading, dispatch]);
+  useEffect(() => {
+    // console.log(state)
+    console.log(data)
+    if (data) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.allProducts,
+      });
+      data.allProducts.forEach((product) => {
+        idbPromise("allProducts", "put", product);
+      });
+    } else if (!loading) {
+      idbPromise("allProducts", "get").then((allProducts) => {
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: allProducts,
+        });
+      });
+    }
+  }, [data, loading, dispatch]);
   
-  console.log(state.products.length)
+  // console.log(state.products.length)
 
 
   // useEffect(() => {
@@ -62,17 +62,17 @@ function ProductList() {
   // }, [data, loading]); //Debug Code
   function filterProducts() {
     if (!currentCategory) {
-      return state.oil;
+      return state.products;
     }
 
-  //   return state.oil.filter(
-  //     (product) => product === currentCategory
-  //   );
-  // }
+    return state.products.filter(
+      (product) => product._id === currentCategory
+    );
+  }
   //   return state.products.filter(
   //     (product) => product.category._id === currentCategory
   //  } );
-  // }
+  //  }
 
   return (
     <div className="my-2">
@@ -80,7 +80,7 @@ function ProductList() {
       {state.products.length > 0 ? (
         <div className="flex-row">
           {/*  {filterProducts().map((product) => ( */}
-           {state.products.map((product) => (
+           {filterProducts().map((product) => (
             <ProductItem
               _id={product._id}
               name={product.name}
