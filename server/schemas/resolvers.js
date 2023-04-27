@@ -18,11 +18,14 @@ const resolvers = {
       //else
       throw new AuthenticationError('Please log in to view your garage.')
     },
- 
     //car oil types
     oil: async (parent, { _id }) => {
       const product = await Product.findById(_id);
       return product;
+    },
+    //all products
+    allProducts: async () => {
+      return await Product.find();
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
@@ -98,9 +101,11 @@ const resolvers = {
       removeCar: async (parent, args, context) => {
         //if the user is logged in...
         if (context.user) {
-          const car = new Car(args);
-          return await User.findByIdAndDelete(context.user._id, { $pull: { ownedCars: car }}, { new:true });
+          const car = Car(args);
+          return await User.findByIdAndUpdate(context.user._id, { $pull: { ownedCars: car } }, { new: true })
         }
+        //else throw login error
+        throw new AuthenticationError('You must be logged in to perform this action.')
       },
       //login
       login: async (parent, { email, password }) => {

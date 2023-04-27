@@ -35,6 +35,7 @@ const typeDefs = gql`
   type Query {
     garage: User
     oil(_id: [ID]!): Product
+    allProducts: [Product]
     checkout(products: [ID]!): Checkout
   }
 
@@ -42,7 +43,7 @@ const typeDefs = gql`
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     deleteUser(_id: ID!): User
     addCar(make: String!, carModel: String!, year: Int!): Car
-    removeCar(_id: ID!): User
+    removeCar(_id: ID!): Car
     login(email: String!, password: String!): Auth
   }
 `;
