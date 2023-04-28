@@ -2,27 +2,33 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    id: ID!
+    _id: ID!
     firstName: String!
     lastName: String!
     email: String!
     ownedCars: [Car]
-    cart: [Product]
+    orders: [Order]
   }
 
   type Car {
-    id: ID!
+    _id: ID!
     make: String!
     carModel: String!
     year: Int!
-    oil: [Product]!
   }
 
   type Product {
-    id: ID!
+    _id: ID!
+    image: String!
     name: String!
     price: Int!
     quantity: Int!
+  }
+
+  type Order {
+    _id: ID
+    purchaseDate: String
+    products: [Product]
   }
 
   type Auth {
@@ -36,16 +42,19 @@ const typeDefs = gql`
   
   type Query {
     garage: User
-    cart: User 
-    oil(product: [ID]!): Product
+    allProducts: [Product]
+    oil(_id: [ID]!): Product
+    order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     deleteUser(_id: ID!): User
+    addOrder(products: [ID]!): Order
+    updateProduct(_id: ID!, quantity: Int!): Product
     addCar(make: String!, carModel: String!, year: Int!): Car
-    removeCar(_id: ID!): User
+    removeCar(_id: ID!): Car
     login(email: String!, password: String!): Auth
   }
 `;

@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const Car = require('./Car');
+const Order = require('./Order');
 
 var validateEmail = function(email) {
   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -33,6 +34,7 @@ const userSchema = new Schema({
     maxlength: 16,
   },
   ownedCars: [Car.schema],
+  orders: [Order.schema]
 });
 
 userSchema.pre("save", async function (next) {
