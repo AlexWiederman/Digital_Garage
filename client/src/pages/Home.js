@@ -1,18 +1,19 @@
 import React from "react";
 import ProductList from "../components/ProductList";
-// import CartItem from "../components/CartItem";
-// import Jumbotron from "../components/Jumbotron";
+import CartItem from "../components/CartItem";
+
 
 import Cart from "../components/Cart";
+
 
 const Home = () => {
   return (
     <div className="container">
       <ProductList />
       {/* <Cart /> */}
-       {/* <CartItem /> */}
-      {/* <Jumbotron /> */}
     </div>
+      
+     
   );
 };
 
