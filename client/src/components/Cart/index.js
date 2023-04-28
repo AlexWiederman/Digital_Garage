@@ -51,12 +51,14 @@ const Cart = () => {
 
     state.cart.forEach((item) => {
       for (let i = 0; i < item.purchaseQuantity; i++) {
-        productIds.push(item._id);
+        productIds.push(item);
       }
     });
 console.log(productIds)
+let cartString = JSON.stringify( state.cart)
     getCheckout({
-      variables: { products: productIds },
+      // variables: { products: productIds },
+      variables: { cart: cartString },
     });
   }
 
