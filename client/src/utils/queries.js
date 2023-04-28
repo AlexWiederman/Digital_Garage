@@ -25,8 +25,8 @@ query Query {
 `;
 
 export const QUERY_CHECKOUT = gql`
-query Oil($products: [ID]!) {
-  checkout(products: $products) {
+query Checkout($cart: String) {
+  checkout(cart: $cart) {
     session
   }
 }
