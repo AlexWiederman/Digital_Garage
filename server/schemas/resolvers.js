@@ -56,10 +56,13 @@ const resolvers = {
 
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const order = new Order({ products: args.products });
+      // const order = new Order({ products: args.products });
+      const order = new Product({ products: args.name });
+
       const line_items = [];
 
-      const { products } = await order.populate('products');
+      // const { products } = await order.populate('products');
+      const { products } = await order.populate('name');
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
