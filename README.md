@@ -28,12 +28,12 @@ Backend
 
 ## Credit
 
-[Hassimiou Diallo](https://github.com/Sadjo456)
-[David Cheptegei](https://github.com/cheptegei-create)
-[Hassimiou Diallo](https://)
-[Hassimiou Diallo](https://)
-[Hassimiou Diallo](https://)
-[Hassimiou Diallo](https://)
+- [Hassimiou Diallo](https://github.com/Sadjo456)
+- [David Cheptegei](https://github.com/cheptegei-create)
+- [Hassimiou Diallo](https://)
+- [Hassimiou Diallo](https://)
+- [Hassimiou Diallo](https://)
+- [Hassimiou Diallo](https://)
 
 
 
