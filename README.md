@@ -29,7 +29,7 @@ Backend
 ## Credit
 
 [Hassimiou Diallo](https://github.com/Sadjo456)
-[Hassimiou Diallo](https://)
+[David Cheptegei](https://github.com/cheptegei-create)
 [Hassimiou Diallo](https://)
 [Hassimiou Diallo](https://)
 [Hassimiou Diallo](https://)
