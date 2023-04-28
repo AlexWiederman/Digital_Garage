@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { StoreProvider } from './utils/GlobalState';
 
 import Home from './pages/Home';
 import Nav from './components/Nav';
@@ -33,6 +34,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+      <StoreProvider>
         <div>
             <Nav />
             <Routes>
@@ -44,9 +46,13 @@ function App() {
                 path="/login" 
                 element={<Login />} 
               />
-
+              <Route 
+                path="/signup" 
+                element={<Signup />} 
+              />
             </Routes>
         </div>
+        </StoreProvider>
       </Router>
      </ApolloProvider> 
   );

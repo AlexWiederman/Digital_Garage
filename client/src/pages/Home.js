@@ -2,7 +2,6 @@ import React from "react";
 import ProductList from "../components/ProductList";
 import CartItem from "../components/CartItem";
 
-
 import Cart from "../components/Cart";
 
 
@@ -10,7 +9,7 @@ const Home = () => {
   return (
     <div className="container">
       <ProductList />
-      {/* <Cart /> */}
+      <Cart />
     </div>
       
      
