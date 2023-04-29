@@ -41,7 +41,7 @@ const typeDefs = gql`
   }
 
   type Checkout {
-    session: ID!
+    session: String
   }
   
   type Query {
@@ -49,7 +49,7 @@ const typeDefs = gql`
     allProducts: [Product]
     oil(_id: [ID]!): Product
     order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    checkout(cart: String): Checkout
   }
 
   type Mutation {
