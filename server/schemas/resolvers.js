@@ -57,20 +57,30 @@ const resolvers = {
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       // const order = new Order({ products: args.products });
+<<<<<<< HEAD
       const order = new Product({ products: args.products });
+=======
+      // const order = new Product({ products: args.name });
+>>>>>>> fbe4cd2505171e276a85ed41dfb9f3482edc0f3a
 
       const line_items = [];
 
       // const { products } = await order.populate('products');
+<<<<<<< HEAD
       const { products } = await order.populate('products');
 
       console.log(products);
+=======
+      // const  products  = [{name: "Pizza", price: 9.99, id: "12412" }]
+      const products = JSON.parse(args.cart)
+>>>>>>> fbe4cd2505171e276a85ed41dfb9f3482edc0f3a
 
+console.log(products)
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
           name: products[i].name,
-          description: products[i].description,
-          images: [`${url}/images/${products[i].image}`]
+          // description: products[i].description,
+          // images: [`${url}/images/${products[i].image}`]
         });
 
         const price = await stripe.prices.create({
@@ -89,7 +99,8 @@ const resolvers = {
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        // success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${url}/`,
         cancel_url: `${url}/`
       });
 
