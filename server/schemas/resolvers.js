@@ -1,8 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Car, Product, Order } = require('../models');
+const { User, Car, Product } = require('../models');
 const { signToken } = require('../utils/auth');
 //second () contains API key, currently a public test key to later be replaced with a custom key set to test mode and imported using a .env file
-const stripe = require('stripe')('pk_test_51N0XmWDAUytjOyUALDTvBl7rqy19lubqzbgRYnAfH5XIuJcavXy96boJ7l2TJH8Mr6BrD0XhS1bBCQLMtTb6yOaP00eehxSPhb');
+const stripe = require('stripe')(process.env.STRIPE);
 
 const resolvers = {
   Query: {
@@ -57,12 +57,14 @@ const resolvers = {
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       // const order = new Order({ products: args.products });
-      const order = new Product({ products: args.name });
+      const order = new Product({ products: args.products });
 
       const line_items = [];
 
       // const { products } = await order.populate('products');
-      const { products } = await order.populate('name');
+      const { products } = await order.populate('products');
+
+      console.log(products);
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
