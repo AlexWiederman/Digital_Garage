@@ -33,11 +33,7 @@ const typeDefs = gql`
 
   type Auth {
     token: ID!
-<<<<<<< HEAD
     user: User
-=======
-    user: User!
->>>>>>> 40aa27a8620141f4a3ccedfef98f22f72e018121
   }
 
   type Checkout {
