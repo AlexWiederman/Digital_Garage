@@ -5,7 +5,7 @@ import { UPDATE_PRODUCTS } from "../../utils/actions";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
-import Container from 'react-bootstrap/Container';
+
 
 
 function ProductList() {
