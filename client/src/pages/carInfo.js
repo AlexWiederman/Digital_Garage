@@ -14,7 +14,7 @@ import { useMutation } from '@apollo/client';
 import {ADD_CAR} from '../utils/mutations';
 import { saveCarIds, getSavedCarIds } from '../utils/localStorage';
 
-const SearchCar = () => {
+const CarInfo = () => {
   // create state for holding returned car api data
   const [searchedCar, setSearchedCar] = useState([]);
   // create state for holding our search field data
@@ -27,7 +27,7 @@ const SearchCar = () => {
   const [saveCar] = useMutation(ADD_CAR);
 
   // set up useEffect hook to save `savedCarIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+  
   useEffect(() => {
     return () => saveCarIds(savedCarIds);
   });
@@ -95,7 +95,7 @@ const SearchCar = () => {
     <>
       <div className="text-light bg-dark p-5">
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search for Cars!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -105,7 +105,7 @@ const SearchCar = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='Search for a car'
                 />
               </Col>
               <Col xs={12} md={4}>
@@ -130,12 +130,12 @@ const SearchCar = () => {
               <Col md="4">
                 <Card key={car.carId} border='dark'>
                   {car.image ? (
-                    <Card.Img src={car.image} alt={`The cover for ${car.title}`} variant='top' />
+                    <Card.Img src={car.image} alt={`The image for ${car.model}`} variant='top' />
                   ) : null}
                   <Card.Body>
-                    <Card.Title>{car.title}</Card.Title>
-                    <p className='small'>Authors: {car.authors}</p>
-                    <Card.Text>{car.description}</Card.Text>
+                    <Card.Title>{car.model}</Card.Title>
+                    <p className='small'>Make: {car.make}</p>
+                    <Card.Text>{car.year}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedCarIds?.some((savedCarId) => savedCarId === car.carId)}
@@ -157,4 +157,4 @@ const SearchCar = () => {
   );
 };
 
-export default SearchCar;
+export default CarInfo;

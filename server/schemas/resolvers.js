@@ -19,29 +19,6 @@ const resolvers = {
       throw new AuthenticationError('Please log in to view your garage.')
     },
 
-    // //user query
-    // user: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id).populate('orders.products');
-
-    //     user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-    //     return user;
-    //   }
-
-    //   throw new AuthenticationError('Not logged in');
-    // },
-
-    //query order
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate('orders.products');
-
-        return user.orders.id(_id);
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
 
     //all products
     allProducts: async () => {
@@ -57,23 +34,13 @@ const resolvers = {
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       // const order = new Order({ products: args.products });
-<<<<<<< HEAD
-      const order = new Product({ products: args.products });
-=======
       // const order = new Product({ products: args.name });
->>>>>>> fbe4cd2505171e276a85ed41dfb9f3482edc0f3a
 
       const line_items = [];
 
       // const { products } = await order.populate('products');
-<<<<<<< HEAD
-      const { products } = await order.populate('products');
-
-      console.log(products);
-=======
       // const  products  = [{name: "Pizza", price: 9.99, id: "12412" }]
       const products = JSON.parse(args.cart)
->>>>>>> fbe4cd2505171e276a85ed41dfb9f3482edc0f3a
 
 console.log(products)
       for (let i = 0; i < products.length; i++) {
@@ -131,19 +98,6 @@ console.log(products)
         }
         //else throw login error
         throw new AuthenticationError('You must be logged in to perform this action.')
-      },
-      //add order
-      addOrder: async (parent, { products }, context) => {
-        console.log(context);
-        if (context.user) {
-          const order = new Order({ products });
-  
-          await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-  
-          return order;
-        }
-  
-        throw new AuthenticationError('Not logged in');
       },
       //add car to garage
       addCar: async (parent, args, context) => {
