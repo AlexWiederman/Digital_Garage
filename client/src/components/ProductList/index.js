@@ -5,6 +5,8 @@ import { UPDATE_PRODUCTS } from "../../utils/actions";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
+import Container from 'react-bootstrap/Container';
+
 
 function ProductList() {
   //Adding oil from products model
@@ -36,28 +38,7 @@ function ProductList() {
     }
   }, [data, loading, dispatch]);
 
-  // console.log(state.products.length)
 
-  // useEffect(() => {
-  //   console.log(data)
-  //   if (data) {
-  //     dispatch({
-  //       type: UPDATE_PRODUCTS,
-  //       products: data.products,
-  //     });
-  //     data.products.forEach((product) => {
-  //       idbPromise("products", "put", product);
-  //     });
-  //   } else if (!loading) {
-  //     idbPromise("products", "get").then((products) => {
-  //       dispatch({
-  //         type: UPDATE_PRODUCTS,
-  //         products: products,
-  //       });
-  //     });
-  //   }
-  // }, [data, loading, dispatch]);
-  // }, [data, loading]); //Debug Code
   function filterProducts() {
     if (!currentCategory) {
       return state.products;
@@ -65,10 +46,7 @@ function ProductList() {
 
     return state.products.filter((product) => product._id === currentCategory);
   }
-  //   return state.products.filter(
-  //     (product) => product.category._id === currentCategory
-  //  } );
-  //  }
+
 
   return (
     <div className="my-2">

@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Footer from './components/Footer'
+import Header from './components/Header'
 // import Success from './pages/Success';
 
 const httpLink = createHttpLink({
@@ -35,8 +37,10 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
       <StoreProvider>
-        <div>
+        <div className="background">
+          <Header />
             <Nav />
+            <div >
             <Routes>
               <Route 
                 path="/" 
@@ -51,6 +55,8 @@ function App() {
                 element={<Signup />} 
               />
             </Routes>
+            </div>
+            <Footer />
         </div>
         </StoreProvider>
       </Router>
