@@ -8,10 +8,11 @@ const Home = () => {
   return (
     <div className="container">
 
-      <div className="body"></div>
+
       
       <ProductList />
       <Cart />
+   
     </div>
   );
 };
