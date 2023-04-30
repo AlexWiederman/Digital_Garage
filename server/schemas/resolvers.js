@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Car, Product, Order } = require('../models');
+const { User, Car, Product } = require('../models');
 const { signToken } = require('../utils/auth');
 //second () contains API key, currently a public test key to later be replaced with a custom key set to test mode and imported using a .env file
 const stripe = require('stripe')(process.env.STRIPE);
@@ -19,29 +19,6 @@ const resolvers = {
       throw new AuthenticationError('Please log in to view your garage.')
     },
 
-    // //user query
-    // user: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id).populate('orders.products');
-
-    //     user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-    //     return user;
-    //   }
-
-    //   throw new AuthenticationError('Not logged in');
-    // },
-
-    //query order
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate('orders.products');
-
-        return user.orders.id(_id);
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
 
     //all products
     allProducts: async () => {
@@ -121,19 +98,6 @@ console.log(products)
         }
         //else throw login error
         throw new AuthenticationError('You must be logged in to perform this action.')
-      },
-      //add order
-      addOrder: async (parent, { products }, context) => {
-        console.log(context);
-        if (context.user) {
-          const order = new Order({ products });
-  
-          await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-  
-          return order;
-        }
-  
-        throw new AuthenticationError('Not logged in');
       },
       //add car to garage
       addCar: async (parent, args, context) => {
