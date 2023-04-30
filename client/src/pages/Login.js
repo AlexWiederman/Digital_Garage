@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 
+
 function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN);
@@ -31,13 +32,14 @@ function Login(props) {
 
   return (
     <div className="container my-1">
-      <Link to="/signup">← Go to Signup</Link>
+      <Link className='sig' to="/signup">← Go to Signup</Link>
 
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
+      <h2 className='log'>Login</h2>
+      <form className= "login" onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Email address:</label>
-          <input
+          <input 
+            className="box"
             placeholder="youremail@test.com"
             name="email"
             type="email"
@@ -46,8 +48,9 @@ function Login(props) {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
+          <label  htmlFor="pwd">Password:</label>
+          <input 
+            className="box"
             placeholder="******"
             name="password"
             type="password"
@@ -56,12 +59,12 @@ function Login(props) {
           />
         </div>
         {error ? (
-          <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+          <div className='box'>
+            <p  className="error-text">The provided credentials are incorrect</p>
           </div>
         ) : null}
         <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+          <button className="sub" type="submit">Submit</button>
         </div>
       </form>
     </div>
