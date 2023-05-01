@@ -51,7 +51,7 @@ const CarInfo = () => {
       const { items } = await response.json();
 
       const carData = items.map((car) => ({
-        carId: car.id,
+        carId: car.carId,
         carModel: car.model,
         make: car.make,
         fuel_type: car.fuel_type,
@@ -85,7 +85,7 @@ const CarInfo = () => {
         throw new Error('something went wrong!');
       }
 
-      // if book successfully saves to user's account, save book id to state
+      // if book successfully saves to user's account, save car id to state
       setSavedCarIds([...savedCarIds, carToSave.carId]);
     } catch (err) {
       console.error(err);
@@ -131,11 +131,11 @@ const CarInfo = () => {
               <Col md="4">
                 <Card key={car.carId} border='dark'>
                   {car.image ? (
-                    <Card.Img src={car.image} alt={`The image for ${car.model}`} variant='top' />
+                    <Card.Img src={car.image} alt={`The image for ${car.make} ${car.model} ${car.year}`} variant='top' />
                   ) : null}
                   <Card.Body>
-                    <Card.Title>{car.model}</Card.Title>
-                    <p className='small'>Make: {car.make}</p>
+                    <Card.Title>{car.make}</Card.Title>
+                    <p className='small'>Model: {car.model}</p>
                     <Card.Text>{car.year}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button

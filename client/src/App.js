@@ -9,6 +9,7 @@ import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CarInfo from './pages/CarInfo';
+import SavedCars from './pages/SavedCars';
 import Footer from './components/Footer'
 import Header from './components/Header'
 // import Success from './pages/Success';
@@ -81,6 +82,10 @@ function App() {
               <Route 
                 path="/carInfo" 
                 element={<ErrorBoundary fallback={<p>Something went wrong</p>}><CarInfo /></ErrorBoundary>} 
+              />
+              <Route 
+                path="/savedCars" 
+                element={<ErrorBoundary fallback={<p>Something went wrong</p>}><SavedCars /></ErrorBoundary>} 
               />
             </Routes>
             </div>

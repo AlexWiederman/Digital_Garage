@@ -14,6 +14,10 @@ const typeDefs = gql`
     make: String!
     carModel: String!
     year: Int!
+    carId: String!
+    image: String
+    drive: String!
+    fuel_type: String
   }
 
   type Product {

@@ -14,17 +14,17 @@ export const saveCarIds = (CarIdArr) => {
   }
 };
 
-export const removeBookId = (bookId) => {
-  const savedBookIds = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+export const removeCarId = (carId) => {
+  const savedCarIds = localStorage.getItem('saved_cars')
+    ? JSON.parse(localStorage.getItem('saved_cars'))
     : null;
 
-  if (!savedBookIds) {
+  if (!savedCarIds) {
     return false;
   }
 
-  const updatedSavedBookIds = savedBookIds?.filter((savedBookId) => savedBookId !== bookId);
-  localStorage.setItem('saved_books', JSON.stringify(updatedSavedBookIds));
+  const updatedSavedCarIds = savedCarIds?.filter((savedCarId) => savedCarId !== carId);
+  localStorage.setItem('saved_cars', JSON.stringify(updatedSavedCarIds));
 
   return true;
 };

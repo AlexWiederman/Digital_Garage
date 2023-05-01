@@ -1,12 +1,12 @@
 import axios from "axios";
 
 export const searchCarInformation = async (query) => {
-   await axios({
+   return await axios({
     method: "get",
     // eslint-disable-next-line
     url: 'https://api.api-ninjas.com/v1/cars?model=' + `${query}`,
     headers: {
-      "X-Api-Key": `${process.env.REACT_APP_NINJA_API_KEY}`,
+      "X-Api-Key": 'uelPqaOOEq8QrCSFhCOtFc9vrxrobFxP4ELN0Leo',
     },
   }).then(function (error, response, body) {
     // if (error) return console.error("Request failed:", error);
@@ -22,7 +22,6 @@ export const searchCarInformation = async (query) => {
     console.log("Status:", response.statusCode);
     console.log("Headers:", JSON.stringify(response.headers));
     console.log("Response:", body);
-    return body;
   });
 };
 // fetch(`https://api.api-ninjas.com/v1/cars?api_key=${process.env.API_KEY}&model=${query}`);

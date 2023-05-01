@@ -10,6 +10,9 @@ function Nav() {
       return (
         <div>
           <ul className="flex-row navBar">
+          <li className="mx-1 navLink">
+              <Link to="/savedCars">SavedCars</Link>
+            </li>
             <li className="mx-1 navLink">
               <Link to="/carInfo">CarInfo</Link>
             </li>
