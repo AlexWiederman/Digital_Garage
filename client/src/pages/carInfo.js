@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Container,
   Col,
@@ -123,7 +123,7 @@ const CarInfo = () => {
         <h2 className='pt-5'>
           {searchedCar.length
             ? `Viewing ${searchedCar.length} results:`
-            : 'Search for a book to begin'}
+            : 'Search for a car to begin'}
         </h2>
         <Row>
           {searchedCar.map((car) => {
