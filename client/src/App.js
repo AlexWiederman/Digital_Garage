@@ -8,11 +8,8 @@ import Home from './pages/Home';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-<<<<<<< HEAD
 import CarInfo from './pages/CarInfo';
 import SavedCars from './pages/SavedCars';
-=======
->>>>>>> c059041028acc45a41d35320739a7b4605f0db79
 import Footer from './components/Footer'
 import Header from './components/Header'
 // import Success from './pages/Success';
@@ -61,11 +58,11 @@ function App() {
               />
               <Route 
                 path="/carInfo" 
-                element={<ErrorBoundary fallback={<p>Something went wrong</p>}><CarInfo /></ErrorBoundary>} 
+                element={<CarInfo />} 
               />
               <Route 
                 path="/savedCars" 
-                element={<ErrorBoundary fallback={<p>Something went wrong</p>}><SavedCars /></ErrorBoundary>} 
+                element={<SavedCars />} 
               />
             </Routes>
             </div>
