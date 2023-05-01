@@ -1,28 +1,23 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const searchCarInformation = async (query) => {
-   await axios({
-    method: "get",
-    // eslint-disable-next-line
-    url: 'https://api.api-ninjas.com/v1/cars?model=' + `${query}`,
-    headers: {
-      "X-Api-Key": `${process.env.REACT_APP_NINJA_API_KEY}`,
+export const searchCarInformation = (query) => {
+  return axios.get(
+    {
+      url: `https://api.api-ninjas.com/v1/cars?model=${query}`,
+      headers: {
+        "X-Api-Key": `${process.env.API_KEY}`,
+      },
     },
-  }).then(function (error, response, body) {
-    // if (error) return console.error("Request failed:", error);
-    // else if (response.statusCode !== 200)
-    //   return console.error(
-    //     "Error:",
-    //     response.statusCode,
-    //     body.toString("utf8")
-    //   );
-    // else console.log(body);
-    // console.log(response);
-    // return response.
-    console.log("Status:", response.statusCode);
-    console.log("Headers:", JSON.stringify(response.headers));
-    console.log("Response:", body);
-    return body;
-  });
+    function (error, response, body) {
+      if (error) return console.error("Request failed:", error);
+      else if (response.statusCode !== 200)
+        return console.error(
+          "Error:",
+          response.statusCode,
+          body.toString("utf8")
+        );
+      else console.log(body);
+    }
+  );
 };
 // fetch(`https://api.api-ninjas.com/v1/cars?api_key=${process.env.API_KEY}&model=${query}`);
