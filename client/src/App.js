@@ -8,14 +8,12 @@ import Home from './pages/Home';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import CarInfo from './pages/CarInfo';
 import Footer from './components/Footer'
 import Header from './components/Header'
 // import Success from './pages/Success';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
-  cache: new InMemoryCache(),
 });
 
 
@@ -55,10 +53,6 @@ function App() {
               <Route 
                 path="/signup" 
                 element={<Signup />} 
-              />
-              <Route 
-                path="/carInfo" 
-                element={<CarInfo />} 
               />
             </Routes>
             </div>
