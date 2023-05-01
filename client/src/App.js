@@ -34,28 +34,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return this.props.fallback;
-    }
-
-    return this.props.children;
-  }
-}
-
-
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -80,7 +58,7 @@ function App() {
               />
               <Route 
                 path="/carInfo" 
-                element={<ErrorBoundary fallback={<p>Something went wrong</p>}><CarInfo /></ErrorBoundary>} 
+                element={<CarInfo />} 
               />
             </Routes>
             </div>

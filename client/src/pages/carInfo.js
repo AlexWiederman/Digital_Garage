@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Col,
   Form,
-  FormControl as Control,
   Button,
   Card,
   Row
@@ -98,9 +97,9 @@ const CarInfo = () => {
         <Container>
           <h1>Search for Cars!</h1>
           <Form onSubmit={handleFormSubmit}>
-            <Row>
+            <Form.Row>
               <Col xs={12} md={8}>
-                <Control
+                <Form.Control
                   name='searchInput'
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
@@ -114,7 +113,7 @@ const CarInfo = () => {
                   Submit Search
                 </Button>
               </Col>
-            </Row>
+            </Form.Row>
           </Form>
         </Container>
       </div>
@@ -123,7 +122,7 @@ const CarInfo = () => {
         <h2 className='pt-5'>
           {searchedCar.length
             ? `Viewing ${searchedCar.length} results:`
-            : 'Search for a car to begin'}
+            : 'Search for a book to begin'}
         </h2>
         <Row>
           {searchedCar.map((car) => {
