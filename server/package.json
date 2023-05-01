@@ -28,7 +28,6 @@
     "stripe": "^8.67.0"
   },
   "devDependencies": {
-    "dotenv-webpack": "^8.0.1",
     "nodemon": "^2.0.6"
   }
 }

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 
 function Nav() {
+
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
@@ -25,20 +26,7 @@ function Nav() {
           </ul>
         </div>
       );
-    } else {
-      return (
-        <div>
-          <ul className="flex-row navBar">
-            <li className="mx-1 navLink">
-              <Link to="/signup">Signup</Link>
-            </li>
-            <li className="mx-1 navLink">
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-        </div>
-      );
-    }
+      }
   }
 
   return (
@@ -50,7 +38,9 @@ function Nav() {
         </Link> */}
       </h1>
 
-      <nav>{showNavigation()}</nav>
+      <nav>
+        {showNavigation()}
+      </nav>
     </header>
   );
 }
