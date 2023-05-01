@@ -13,20 +13,6 @@ const carSchema = new Schema({
     type: Number,
     required: true,
   },
-  image: {
-    type: String,
-  },
-  carId: {
-    type: String,
-    required: true,
-  },
-  drive: {
-    type: String,
-    required: true,
-  },
-  fuel_type: {
-    type: String,
-  },
 });
 
 const Car = model("Car", carSchema);
