@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import CarInfo from './pages/CarInfo';
+import SavedCars from './pages/SavedCars';
 import Footer from './components/Footer'
 import Header from './components/Header'
 // import Success from './pages/Success';
@@ -53,6 +55,14 @@ function App() {
               <Route 
                 path="/signup" 
                 element={<Signup />} 
+              />
+              <Route 
+                path="/carInfo" 
+                element={<CarInfo />} 
+              />
+              <Route 
+                path="/savedCars" 
+                element={<SavedCars />} 
               />
             </Routes>
             </div>
