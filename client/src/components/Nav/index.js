@@ -46,7 +46,7 @@ function Nav() {
       }
   }
 
-  }
+  
 
   return (
     <header className="flex-row px-2">
